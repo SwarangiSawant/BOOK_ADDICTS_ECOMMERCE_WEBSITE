@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>{% block title%} {% endblock %}</title>
+      <style>
+      body{
+       background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)) , url('../../media/shop/images/header.jpg');
+        background-size: cover ;
+        background-repeat:repeat-y;
+        color:white;
+        font-family:Georgia;
+        }
+        {% block css %} {% endblock %}
+      </style>
+ </head>
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="/shop">Book Addicts</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/shop">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/shop/about">About Us</a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/shop/tracker">Tracker</a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/shop/contact">Contact Us</a>
+      </li>
+
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <button type="button" class="btn btn-secondary mx-2"  id="popcart" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Vivamus
+sagittis lacus vel augue laoreet rutrum faucibus.">
+  Cart(<span id="cart">0</span>)
+    </button>
+  </div>
+</nav>
+{% block body %} {% endblock %}
+
+  <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  <script>
+      console.log('working');
+      if(localStorage.getItem('cart') == null){
+      var cart={};
+      }
+      else{
+      cart=JSON.parse(localStorage.getItem('cart'));
+      document.getElementById('cart').innerHTML=Object.keys(cart).length;
+      }
+
+      $('.cart').click(function(){
+
+      console.log('clicked');
+      var idstr=this.id.toString();
+      console.log(idstr)
+      if(cart[idstr] !=undefined){
+      cart[idstr]=cart[idstr]+1;
+      }
+      else{
+      cart[idstr]=1;
+      }
+      console.log(cart);
+      localStorage.setItem('cart',JSON.stringify(cart));
+      document.getElementById('cart').innerHTML=Object.keys(cart).length;
+      });
+     $('#popcart').popover()
+
+     document.getElementById("popcart").setAttribute('data-content','<h5>Cart for your items in Book Addicts Cart</h5>');
+    </script>
+  {% block js %} {% endblock %}
+  </body>
+</html>

@@ -1,0 +1,39 @@
+{% extends 'shop/basic.html' %}
+
+{% block title%}Contact Us{% endblock %}
+{% block body %}
+
+<div class="container my-3">
+    <h3>Contact Us Regarding any Queries</h3>
+    <form action="/shop/contact/" method="post">{% csrf_token %}
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name"  name='name' placeholder="Enter Your Name">
+  </div>
+  <div class="form-group">
+    <label for="name">Email</label>
+    <input type="email" class="form-control" id="email"  name='email' placeholder="Enter Your Email">
+  </div>
+ <div class="form-group">
+    <label for="name">Phone</label>
+    <input type="tel" class="form-control" id="phone"  name='phone'placeholder="Enter Your Phone">
+  </div>
+  <div class="form-group">
+    <label for="desc">How May We Help You?</label>
+    <textarea class="form-control" id="desc"  name='desc' rows="3"></textarea>
+  </div>
+<!--  <div class="g-recaptcha" data-sitekey="6Ld3KmQUAAAAAPt7101D6_qEKvpJF3PQoU9l3CSp"></div>  <br>-->
+   <button type="submit" class="btn btn-info">Submit</button>
+
+</form>
+</div>
+{% endblock %}
+{% block js %}
+<script>
+<!--<script src='https://www.google.com/recaptcha/api.js'></script>-->
+{% if thank %}
+alert("Thanks for contacting us. We will soon reach to you!")
+document.location="/shop";
+{%endif%}
+</script>
+{% endblock %}
